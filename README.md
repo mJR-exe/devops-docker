@@ -38,3 +38,43 @@ CMD ["node", "/app/app.js"]
 - Roda com o comando docker `run -d -p 8080:3000 mjrsf/node-devops`
 - Verifica se o container está rodando com o comando `docker ps`
 - Abre o navegador e, entrando no localhost (`localhost:8080`), verificamos também seu funcionamento
+
+# Exercício 3
+
+- Cria-se o docker-compose.yaml
+
+```
+volumes:
+    app-vol:
+
+networks:
+    app-net:
+
+services:
+    app-node:
+        depends-on:
+            - postgres-app
+            - nginx-app
+        build: .
+        command: node /app/app.js
+        ports:
+            - 3000:3000
+        networks:
+            - app-net
+            
+    nginx-app:
+        image: nginx:lastest
+        ports:
+            - 80:80
+        networks:
+            - app-net
+            
+    postgres-app:
+        image: postgres:lastest
+        ports:
+            - 5432:5432
+        volumes: 
+            - app-vol:/var/lib/postgresql/data
+        networks:
+            - app-net
+```
