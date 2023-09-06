@@ -1,7 +1,7 @@
 **Exercício 1**
-
+Foram usados os seguintes comandos, em ordem:
 ```
-docker run ubuntu
+docker run ubuntu:latest
 docker run -it ubuntu /bin/bash
 apt-get -y update
 apt-get -y install curl
@@ -17,3 +17,24 @@ Features: alt-svc AsynchDNS brotli GSS-API HSTS HTTP2 HTTPS-proxy IDN IPv6 Kerbe
 ```
 
 **Exercício 2**
+- Cria-se um arquivo app.js com o exemplo básico do Express
+- Cria-se um Dockerfile da seguinte maneira:
+
+```
+FROM node:alpine
+
+COPY . /app
+
+WORKDIR /app
+
+RUN npm install
+
+EXPOSE 8080
+
+CMD ["node", "/app/app.js"]
+```
+
+- Builda a imagem com o comando `docker build -t mjrsf/node-devops .`
+- Roda com o comando docker `run -d -p 8080:3000 mjrsf/node-devops`
+- Verifica se o container está rodando com o comando `docker ps`
+- Abre o navegador e, entrando no localhost (`localhost:8080`), verificamos também seu funcionamento
