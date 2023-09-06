@@ -63,14 +63,14 @@ services:
             - app-net
             
     nginx-app:
-        image: nginx:lastest
+        image: nginx:latest
         ports:
             - 80:80
         networks:
             - app-net
             
     postgres-app:
-        image: postgres:lastest
+        image: postgres:latest
         ports:
             - 5432:5432
         volumes: 
